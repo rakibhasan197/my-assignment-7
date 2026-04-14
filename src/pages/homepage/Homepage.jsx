@@ -1,9 +1,13 @@
 import React from 'react';
+import Banner from './Banner';
+import FriendsPage from './FriendsPage';
 
 const Homepage = () => {
   return (
     <div>
-      Homepage
+   <Banner></Banner>
+  <FriendsPage></FriendsPage>
+     
     </div>
   );
 };

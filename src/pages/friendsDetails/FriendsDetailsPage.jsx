@@ -40,7 +40,7 @@ const handleAudioBtn = () => {
 
   setTimeline(prev => [
     ...prev,
-    { type: "audio", friend: expectedFriend }
+    { type: "audio", friend: expectedFriend,  createdAt: new Date().toISOString() }
   ]);
 };
 
@@ -49,16 +49,16 @@ const handleTextBtn = () => {
 
   setTimeline(prev => [
     ...prev,
-    { type: "text", friend: expectedFriend }
+    { type: "text", friend: expectedFriend, createdAt: new Date().toISOString() }
   ]);
 };
 
 const handleVideoBtn = () => {
-  setVideo([...video, expectedFriend]);
+  setVideo([...video, expectedFriend, ]);
 
   setTimeline(prev => [
     ...prev,
-    { type: "video", friend: expectedFriend }
+    { type: "video", friend: expectedFriend,  createdAt: new Date().toISOString() }
   ]);
 };
    

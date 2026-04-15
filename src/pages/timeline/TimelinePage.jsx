@@ -11,7 +11,7 @@ const TimelinePage = () => {
   return (
     <div>
 
-      <h2 className='text-5xl font-bold container mx-auto'>Timeline</h2>
+      <h2 className='text-5xl font-bold container mx-auto mt-10'>Timeline</h2>
       {timeline.length === 0 && (
         <p className='font-bold text-2xl mt-20 text-center'>No activity yet 😴</p>
       )}

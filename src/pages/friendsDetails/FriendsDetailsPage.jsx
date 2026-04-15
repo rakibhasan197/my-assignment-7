@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import { useParams } from 'react-router';
 import useApps from '../../components/hooks/useApps';
 import { HiOutlineBellSnooze } from 'react-icons/hi2';
@@ -7,16 +7,24 @@ import { MdDelete } from 'react-icons/md';
 import { IoCall } from 'react-icons/io5';
 import { IoMdText } from 'react-icons/io';
 import { FaVideo } from 'react-icons/fa';
+import { FriendsContext } from '../../context/FriendsContextProvider';
 
 
 const FriendsDetailsPage = () => {
+
+ 
   const { id } = useParams();
-  console.log(id, 'id')
+  // console.log(id, 'id')
   const { friends, loading } = useApps();
   const expectedFriend = friends.find((friend) => String(friend.id) === id)
-  console.log(friends, loading, 'loading')
-  console.log(expectedFriend, 'expectedFriend');
-
+  // console.log(friends, loading, 'loading')
+  // console.log(expectedFriend, 'expectedFriend');
+// const [active, setActive] = useState('')
+//  const [audio, setAudio] = useState([])
+// const [text, setText] = useState([]);
+// const [video, setVideo] = useState([])
+ 
+const {timeline, setTimeline, audio, setAudio, text, setText, video, setVideo}= useContext(FriendsContext);
 
   if (loading) {
     return <p>Loading...</p>;
@@ -26,12 +34,41 @@ const FriendsDetailsPage = () => {
   if (!expectedFriend) {
     return <p>Friend not found</p>;
   }
+
+const handleAudioBtn = () => {
+  setAudio([...audio, expectedFriend]);
+
+  setTimeline(prev => [
+    ...prev,
+    { type: "audio", friend: expectedFriend }
+  ]);
+};
+
+const handleTextBtn = () => {
+  setText([...text, expectedFriend]);
+
+  setTimeline(prev => [
+    ...prev,
+    { type: "text", friend: expectedFriend }
+  ]);
+};
+
+const handleVideoBtn = () => {
+  setVideo([...video, expectedFriend]);
+
+  setTimeline(prev => [
+    ...prev,
+    { type: "video", friend: expectedFriend }
+  ]);
+};
+   
   return (
     <div className='flex justify-center items-stretch gap-3 container mx-auto mt-6'>
       {/* left side div container */}
       <div className='space-y-2'>
         <div className='shadow p-4 flex flex-col items-center justify-center text-center'>
           <img src={expectedFriend.picture} alt="" className='mb-3 rounded-full' />
+        <h2 className='font-semibold text-xl mb-1'>{expectedFriend.name}</h2>
           <span
             className={`${expectedFriend.status === 'overdue'
               ? 'bg-red-500 text-white py-1 px-2 rounded'
@@ -98,15 +135,15 @@ const FriendsDetailsPage = () => {
           
           <h2 className='text-green-900 text-xl font-semibold'>Quick Check-In</h2>
           <div className='flex justify-between gap-4 items-center'>
-          <button className='bg-slate-100 py-4 px-20 rounded-md'>
+          <button onClick={handleAudioBtn} className='bg-slate-100 py-4 px-20 rounded-md'>
             <h2 className='text-xl'><IoCall /></h2>
             <p className='text-gray-500'>Call</p>
           </button>
-          <button className='bg-slate-100 py-4 px-20 rounded-md'>
+          <button onClick={handleTextBtn} className='bg-slate-100 py-4 px-20 rounded-md'>
             <h2 className='text-xl'><IoMdText /></h2>
             <p className='text-gray-500'>Text</p>
           </button>
-          <button className='bg-slate-100 py-4 px-20 rounded-md'>
+          <button onClick={handleVideoBtn} className='bg-slate-100 py-4 px-20 rounded-md'>
             <h2 className='text-xl'><FaVideo /></h2>
             <p className='text-gray-500'>Video</p>
           </button>

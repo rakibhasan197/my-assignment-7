@@ -1,19 +1,11 @@
-# React + Vite
+Name project : my project name is keenkeeper;
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
-
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
-
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Description: In the keenkeeper project have a lot of facilities i made here a some man who connect with me in call, text, and video they are all relatives and familiar person like brother, friend, office colegue etc whom i connect most of the i showed there details in my project there u can see pic email address data calling history bio data of them.
 
 
+Technology: In my i used so some Technology like Es6 js, reactjs, tailwind css, daisyui, react router etc.
 
+feature: 1. my project is user friendly any user can use easily it interactive smoothly it is responsive any user can use it mobile laptop, tablet anywhere.
+2..the can data load dynamically. The project uses dynamic data rendering, which means content updates automatically without reloading the page. This improves performance and user experience. 
+
+3.you can calling anyone data will be and history will be show this is mostly user friendly application.

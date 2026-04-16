@@ -4,7 +4,7 @@ import FriendsPage from './FriendsPage';
 
 const Homepage = () => {
   return (
-    <div>
+    <div className='bg-base-200'>
    <Banner></Banner>
   <FriendsPage></FriendsPage>
      

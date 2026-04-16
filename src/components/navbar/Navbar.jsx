@@ -4,16 +4,47 @@ import { RiHome2Line, RiTimeLine } from 'react-icons/ri';
 import { NavLink } from 'react-router';
 
 const Navbar = () => {
+
+  const linkClass = ({ isActive }) =>
+    `font-semibold flex items-center gap-2 px-4 py-2 rounded-md ${
+      isActive ? 'bg-green-900 text-white' : 'text-gray-500'
+    }`;
+
   return (
-    <div className='flex justify-between px-10 py-4 shadow'>
-      <h2 className='font-semibold text-3xl'>Keen<span className='text-green-900'>Keeper</span></h2>
-    <ul className='flex gap-2 items-center'>
-      <li><NavLink to={'/'} className={({isActive})=>`font-semibold flex items-center gap-2 ${isActive ? 'bg-green-900 text-white rounded-md py-2 px-4' : 'text-gray-500 rounded-md py-2 px-4'}`}><RiHome2Line /> Home</NavLink></li>
+    <div className='shadow py-4 px-6'>
 
-      <li><NavLink to={'/timeline'} className={({isActive})=>`font-semibold flex items-center gap-2 ${isActive ? 'bg-green-900 text-white rounded-md py-2 px-4' : 'text-gray-500 rounded-md py-2 px-4'}`}><RiTimeLine />Timeline</NavLink></li>
+   
+      <div className='flex flex-col md:flex-row md:justify-between md:items-center items-center'>
 
-      <li><NavLink to={'/stats'} className={({isActive})=>`font-semibold flex items-center gap-2 ${isActive ? 'bg-green-900 text-white rounded-md py-2 px-4' : 'text-gray-500 rounded-md py-2 px-4'}`}><ImStatsDots />Stats</NavLink></li>
-    </ul>
+     
+        <h2 className='font-semibold text-3xl mb-3 md:mb-0'>
+          Keen<span className='text-green-900'>Keeper</span>
+        </h2>
+
+      
+        <ul className='flex md:flex-row items-center gap-3'>
+
+          <li>
+            <NavLink to='/' className={linkClass}>
+              <RiHome2Line /> Home
+            </NavLink>
+          </li>
+
+          <li>
+            <NavLink to='/timeline' className={linkClass}>
+              <RiTimeLine /> Timeline
+            </NavLink>
+          </li>
+
+          <li>
+            <NavLink to='/stats' className={linkClass}>
+              <ImStatsDots /> Stats
+            </NavLink>
+          </li>
+
+        </ul>
+
+      </div>
     </div>
   );
 };

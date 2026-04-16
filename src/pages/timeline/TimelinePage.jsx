@@ -2,55 +2,110 @@ import React, { useContext } from 'react';
 import { FriendsContext } from '../../context/FriendsContextProvider';
 import callImg from '../../assets/call.png';
 import videoImg from '../../assets/video.png';
-import textImg from '../../assets/text.png'
+import textImg from '../../assets/text.png';
+import { HashLoader } from 'react-spinners';
 
 const TimelinePage = () => {
 
-  const { timeline, createdAt } = useContext(FriendsContext);
-  // console.log(audio,text, video,'contextData')
+  const { timeline, loading, active, setActive } = useContext(FriendsContext);
+
+  const filteredTimeline = !active
+    ? timeline
+    : timeline.filter(item => item.type === active);
+
   return (
-    <div>
+    <div className='container mx-auto px-4'>
 
-      <h2 className='text-5xl font-bold container mx-auto mt-10'>Timeline</h2>
-      {timeline.length === 0 && (
-        <p className='font-bold text-2xl mt-20 text-center'>No activity yet 😴</p>
-      )}
-      {timeline.map((item, ind) => (
-        <div key={ind} className='container mx-auto mt-10 shadow p-4 rounded-md flex items-center gap-4'>
-          {item.type === "audio" && (
-            <>
-              <img src={callImg} />
-              <span className='font-semibold text-xl'>Call</span><span className='text-gray-500'>with: {item.friend.name}</span>
-              <p className="text-sm text-gray-500">
-                {new Date(item.createdAt).toLocaleDateString()}
-              </p>
-            </>
-          )}
+      <h2 className='text-3xl sm:text-4xl md:text-5xl font-bold mt-10'>
+        Timeline
+      </h2>
 
-          {item.type === "text" && (
-            <>
-              <img src={textImg} />
-              <span className='font-semibold text-xl'>Text</span><span className='text-gray-500'>with: {item.friend.name}</span>
-               <p className="text-sm text-gray-500">
-                {new Date(item.createdAt).toLocaleDateString()}
-              </p>
-            </>
-          )}
+      {/* FILTER */}
+      <div className="dropdown dropdown-start mt-4">
 
-          {item.type === "video" && (
-            <>
-              <img src={videoImg} />
-              <span className='text-xl font-semibold'>Video</span><span className='text-gray-500'>with: {item.friend.name}</span>
-               <p className="text-sm text-gray-500">
-                {new Date(item.createdAt).toLocaleDateString()}
-              </p>
-            </>
-          )}
-
+        <div tabIndex={0} role="button" className="btn text-gray-500">
+          Filter timeline ⬇️
         </div>
-      ))}
 
-      
+        <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box w-52 p-2 shadow">
+
+          <li><a onClick={() => setActive('audio')}>Call</a></li>
+          <li><a onClick={() => setActive('text')}>Text</a></li>
+          <li><a onClick={() => setActive('video')}>Video</a></li>
+          <li><a onClick={() => setActive('')}>All</a></li>
+
+        </ul>
+
+      </div>
+
+      {/* CONTENT */}
+      <div className='shadow p-4 sm:p-6 md:p-10 rounded-md mt-6'>
+
+        {loading ? (
+          <div className="h-[60vh] flex justify-center items-center">
+            <HashLoader color="#36d7b7" />
+          </div>
+        ) : filteredTimeline.length === 0 ? (
+          <p className='text-center font-bold text-xl sm:text-2xl'>
+            No activity yet 😴
+          </p>
+        ) : (
+          filteredTimeline.map((item, ind) => (
+            <div
+              key={ind}
+              className='mt-5 shadow p-3 sm:p-4 flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 rounded-md'
+            >
+
+              {item.type === "audio" && (
+                <>
+                  <img src={callImg} className='w-10 h-10 sm:w-12 sm:h-12' />
+                  <div>
+                    <h2 className='font-semibold'>Call</h2>
+                    <p className='text-gray-500 text-sm sm:text-base'>
+                      with: {item.friend.name}
+                    </p>
+                    <p className="text-xs sm:text-sm text-gray-400">
+                      {new Date(item.createdAt).toLocaleDateString()}
+                    </p>
+                  </div>
+                </>
+              )}
+
+              {item.type === "text" && (
+                <>
+                  <img src={textImg} className='w-10 h-10 sm:w-12 sm:h-12' />
+                  <div>
+                    <h2 className='font-semibold'>Text</h2>
+                    <p className='text-gray-500 text-sm sm:text-base'>
+                      with: {item.friend.name}
+                    </p>
+                    <p className="text-xs sm:text-sm text-gray-400">
+                      {new Date(item.createdAt).toLocaleDateString()}
+                    </p>
+                  </div>
+                </>
+              )}
+
+              {item.type === "video" && (
+                <>
+                  <img src={videoImg} className='w-10 h-10 sm:w-12 sm:h-12' />
+                  <div>
+                    <h2 className='font-semibold'>Video</h2>
+                    <p className='text-gray-500 text-sm sm:text-base'>
+                      with: {item.friend.name}
+                    </p>
+                    <p className="text-xs sm:text-sm text-gray-400">
+                      {new Date(item.createdAt).toLocaleDateString()}
+                    </p>
+                  </div>
+                </>
+              )}
+
+            </div>
+          ))
+        )}
+
+      </div>
     </div>
   );
 };

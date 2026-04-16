@@ -1,4 +1,5 @@
 import React, { createContext, useState } from 'react';
+import useApps from '../components/hooks/useApps';
 
 export const FriendsContext = createContext()
 
@@ -8,6 +9,7 @@ const [text, setText] = useState([]);
 const [video, setVideo] = useState([]);
  const [active, setActive] = useState('');
  const [timeline, setTimeline ,  createdAt] = useState([]);
+ const {loading} = useApps();
 
 const data = {
   audio,
@@ -20,7 +22,8 @@ const data = {
   setActive,
   timeline,
   setTimeline,
-  createdAt
+  createdAt,
+  loading
 }
 
   return <FriendsContext.Provider value={data}>
